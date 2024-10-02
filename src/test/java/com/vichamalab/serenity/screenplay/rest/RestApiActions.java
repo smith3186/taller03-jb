@@ -1,6 +1,9 @@
 package com.vichamalab.serenity.screenplay.rest;
 
 import static io.restassured.RestAssured.given;
+
+import io.restassured.builder.RequestSpecBuilder;
+import org.h2.util.Utils;
 import org.junit.jupiter.api.Assertions;
 
 import com.vichamalab.serenity.dto.ProductRequest;
@@ -27,6 +30,9 @@ public class RestApiActions extends UIInteractions {
     @Given("Dada una api con url")
     public void dadoUnaApiConUrl() {
     	RestAssured.baseURI="http://localhost:8081";
+		RequestSpecBuilder builder = new RequestSpecBuilder();
+		builder.addHeader("Authorization","Bearer aGFzaGRzZnNkZnNkZnNkZnNk");
+
     	currentUrl="/api/v1/product/";
     	productRequest = new ProductRequest();
     }
@@ -46,4 +52,10 @@ public class RestApiActions extends UIInteractions {
     	int statusCode = 201;
     	Assertions.assertEquals(statusCode,response.getStatusCode());
     }
+
+	@Then("Entonces se recibe una respuesta exitosa con codigo y mensaje")
+	public void entoncesRecibeRespuestaFallidayMensaje() {
+		int statusCode = 400;
+		Assertions.assertEquals(statusCode,response.getStatusCode());
+	}
 }

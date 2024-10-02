@@ -20,4 +20,12 @@ public class ScreenplayUIActionsTestSuite {
 		restApiActions.cuandoSeEnviaPeticionConNombreDescripcionYPrecio(0l);
 		restApiActions.entoncesRecibeRespuestaExitosayMensaje();
 	}
+
+	@Test
+	@Tag("uiactions")
+	public void errorcrearProducto() {
+		restApiActions.dadoUnaApiConUrl();
+		restApiActions.cuandoSeEnviaPeticionConNombreDescripcionYPrecio(0l);
+		restApiActions.entoncesRecibeRespuestaFallidayMensaje();
+	}
 }
