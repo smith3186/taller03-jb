@@ -24,27 +24,7 @@ import org.junit.jupiter.api.Test;
 @Tag("SerenityRestInteractions")
 @ExtendWith(SerenityJUnit5Extension.class)
 public class ScreenplayRestInteractionsTestSuite {
-	private EnvironmentVariables environmentVariables; 
-	
-	@Test
-	@Tag("rest")
-	@DisplayName("Listar productos")
-	public void listar_productos() {
-		String baseUrl = environmentVariables.optionalProperty("restapi.baseurl") 
-                .orElse("");
-				
-	    Actor authorizeUser = Actor.named("Usuario Autorizado")
-	                     .whoCan(CallAnApi.at(baseUrl));
-
-	    authorizeUser.attemptsTo(
-	            Get.resource("api/v1/product/")
-	    );
-	    authorizeUser.should(
-	            seeThatResponse("El codigo de respuesta es 200 y el estado es verdadero",
-	                    response -> response.statusCode(200)
-	                                        .body("status",equalTo(true)))
-	    );
-	}
+	private EnvironmentVariables environmentVariables;
 	
 	@Test
 	@Tag("rest")
@@ -70,5 +50,26 @@ public class ScreenplayRestInteractionsTestSuite {
 	                    response -> response.statusCode(201)
 	                                        .body("status",equalTo(true)))
 	    );
+	}
+
+
+	@Test
+	@Tag("rest")
+	@DisplayName("Listar productos")
+	public void listar_productos() {
+		String baseUrl = environmentVariables.optionalProperty("restapi.baseurl")
+				.orElse("");
+
+		Actor authorizeUser = Actor.named("Usuario Autorizado")
+				.whoCan(CallAnApi.at(baseUrl));
+
+		authorizeUser.attemptsTo(
+				Get.resource("api/v1/product/")
+		);
+		authorizeUser.should(
+				seeThatResponse("El codigo de respuesta es 200 y el estado es verdadero",
+						response -> response.statusCode(200)
+								.body("status",equalTo(true)))
+		);
 	}
 }

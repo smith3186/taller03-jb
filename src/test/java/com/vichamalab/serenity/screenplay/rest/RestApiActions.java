@@ -41,7 +41,7 @@ public class RestApiActions extends UIInteractions {
     public void cuandoSeEnviaPeticionConNombreDescripcionYPrecio(Long id) {
     	productRequest.setName("Nombre");
     	productRequest.setDescription("Descripcion");
-    	productRequest.setPrice(1500);
+    	productRequest.setPrice(3500);
 		response = given().contentType(ContentType.JSON)// Headers
 				.body(productRequest).when().post(currentUrl)// Uri
 				.then().extract().response();
